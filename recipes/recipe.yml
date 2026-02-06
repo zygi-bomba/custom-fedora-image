@@ -16,11 +16,14 @@ modules:
       - terra-release # To zainstaluje klucze GPG i konfigurację na stałe
       - noctalia-shell
       - niri
-      - foot         # Terminal
-      - waybar       # Pasek zadań
-      - swaybg       # Tapeta
-      - fuzzel       # Menu aplikacji (Wayland-native)
       - xorg-x11-server-Xwayland
+      - wl-clipboard
+      - xdg-desktop-portal-gtk
+      - xdg-desktop-portal-gnome
+      - gnome-keyring
+      - stow
+      - neovim
+      - git
   
   - type: script
     scripts:
