@@ -8,10 +8,6 @@ modules:
     files:
       - source: etc
         destination: /etc
-      - source: etc/justfile
-        destination: /etc/justfile
-      - source: etc/profile.d/init-user.sh
-        destination: /etc/profile.d/init-user.sh
   
   - type: rpm-ostree
     repos:
