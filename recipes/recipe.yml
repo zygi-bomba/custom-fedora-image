@@ -8,12 +8,16 @@ modules:
     files:
       - source: etc
         destination: /etc
-
+      - source: etc/justfile
+        destination: /etc/justfile
+      - source: etc/profile.d/init-dots.sh
+        destination: /etc/profile.d/init-dots.sh
+  
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/yalter/niri/repo/fedora-%OS_VERSION%/yalter-niri-fedora-%OS_VERSION%.repo
     install:
-      - terra-release # To zainstaluje klucze GPG i konfigurację na stałe
+      - terra-release
       - noctalia-shell
       - niri
       - xorg-x11-server-Xwayland
@@ -24,6 +28,7 @@ modules:
       - stow
       - neovim
       - git
+      - just
   
   - type: script
     scripts:
