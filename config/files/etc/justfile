@@ -1,20 +1,27 @@
-# /etc/justfile
+# /etc/justfile lub ~/dotfiles/justfile
 
 setup-dots:
     #!/bin/bash
-    REPO_URL="https://github.com/zygi-bomba/dotfiles.git"
     DOT_DIR="$HOME/dotfiles"
+    BACKUP_DIR="$HOME/dotfiles_backup/$(date +%Y%m%d_%H%M%S)"
     
-    if [ ! -d "$DOT_DIR" ]; then
-        echo "Cloning dotfiles..."
-        git clone "$REPO_URL" "$DOT_DIR"
-    fi
-    
-    cd "$DOT_DIR"
+    mkdir -p "$BACKUP_DIR"
 
-    for dir in */; do
-        pkg=${dir%/}
-        echo "Stowing $pkg..."
-        stow -R -t "$HOME" "$pkg"
+    cd "$DOT_DIR"
+    for pkg in */; do
+        pkg=${pkg%/}
+        
+        # Ścieżka, którą stow chce zająć (np. ~/.config/niri)
+        # Uproszczone: sprawdzamy najczęstsze lokalizacje
+        TARGET="$HOME/.config/$pkg"
+        
+        # 1. Jeśli to PRAWDZIWY folder/plik (nie link), zrób kopię
+        if [ -e "$TARGET" ] && [ ! -L "$TARGET" ]; then
+            echo "⚠️  Wykryto konflikt dla $pkg. Przenoszę oryginał do $BACKUP_DIR"
+            mkdir -p "$(dirname "$BACKUP_DIR/${pkg}")"
+            mv "$TARGET" "$BACKUP_DIR/"
+        fi
+
+        # 2. Teraz stow może bezpiecznie stworzyć link
+        stow -R -v -t "$HOME" "$pkg"
     done
-    echo "Gotowe! Twoje środowisko jest skonfigurowane."
