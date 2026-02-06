@@ -4,15 +4,14 @@ base-image: ghcr.io/blue-build/base-images/fedora-silverblue
 image-version: 43
 
 modules:
+  - type: files
+    files:
+      - etc: /etc # To kopiuje config/files/etc do systemowego /etc
+      - usr: /usr
+
   - type: rpm-ostree
     repos:
       - https://copr.fedorainfracloud.org/coprs/yalter/niri/repo/fedora-%OS_VERSION%/yalter-niri-fedora-%OS_VERSION%.repo
-      - |
-        [terra]
-        name=Terra %OS_VERSION%
-        baseurl=https://repos.fyralabs.com/terra%OS_VERSION%/
-        enabled=1
-        gpgcheck=0
     install:
       - terra-release # To zainstaluje klucze GPG i konfigurację na stałe
       - noctalia-shell
@@ -22,11 +21,6 @@ modules:
       - swaybg       # Tapeta
       - fuzzel       # Menu aplikacji (Wayland-native)
       - xorg-x11-server-Xwayland
-
-  - type: files
-    files:
-      - etc: /etc # To kopiuje config/files/etc do systemowego /etc
-      - usr: /usr
   
   - type: script
     scripts:
