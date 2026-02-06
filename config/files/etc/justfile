@@ -44,6 +44,7 @@ init-dots:
         # 4. Finalne wywołanie STOW (teraz bez konfliktów)
         stow -R -t "$HOME" "$pkg"
     done
-
+    mkdir -p "$HOME/.config"
+    touch "$HOME/.config/.dots-initialized"
     echo "✨ Gotowe! Twoje dotfiles są aktywne."
     echo "📁 Kopie zapasowe starych plików znajdziesz w: $BACKUP_DIR"
