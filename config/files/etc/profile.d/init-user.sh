@@ -5,5 +5,5 @@
 # 2. Nie ma jeszcze pliku-znacznika
 if [[ $- == *i* ]] && [ ! -f "$HOME/.config/.home-initialized" ]; then
     echo "Wykryto pierwsze logowanie. Konfiguruję środowisko..."
-    just setup-home
+    jg init_dots
 fi
