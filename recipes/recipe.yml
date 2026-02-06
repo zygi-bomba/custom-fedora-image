@@ -6,8 +6,8 @@ image-version: 43
 modules:
   - type: files
     files:
-      - etc: /etc # To kopiuje config/files/etc do systemowego /etc
-      - usr: /usr
+      - source: etc
+        destination: /etc
 
   - type: rpm-ostree
     repos:
