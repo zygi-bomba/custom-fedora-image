@@ -1,0 +1,25 @@
+// Start usług
+spawn-at-startup "noctalia"
+spawn-at-startup "swaybg" "-n" "1" "-c" "#1a1b26"
+
+binds {
+    Mod+Return { spawn "foot"; }
+    Mod+D { spawn "fuzzel"; }
+    Mod+Q { close-window; }
+    
+    // Logowanie/Wyjście
+    Mod+Shift+E { quit; }
+
+    // Poruszanie się po kolumnach (Niri vibe)
+    Mod+Left  { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    
+    // Układ okien
+    Mod+Comma  { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
+}
+
+layout {
+    gap 12
+    center-focused-column-window
+}
