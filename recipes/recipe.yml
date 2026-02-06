@@ -6,8 +6,8 @@ image-version: 43
 modules:
   - type: rpm-ostree
     repos:
-      - https://copr.fedorainfracloud.org/coprs/yusdacra/niri/repo/fedora-%OS_VERSION%/yusdacra-niri.repo
-      - https://repos.fyralabs.com/terra41/terra.repo
+      - https://copr.fedorainfracloud.org/coprs/yalter/niri/repo/fedora-%OS_VERSION%/yusdacra-niri.repo
+      - https://repos.fyralabs.com/terra%OS_VERSION%/terra.repo
     install:
       - terra-release # To zainstaluje klucze GPG i konfigurację na stałe
       - noctalia-shell
