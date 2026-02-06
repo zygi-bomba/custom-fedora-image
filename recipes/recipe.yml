@@ -16,7 +16,10 @@ modules:
       - fuzzel       # Menu aplikacji (Wayland-native)
       - xorg-x11-server-Xwayland
 
-  - type: files # Kopiuje pliki z folderu config/files do obrazu
+  - type: files
+    files:
+      - etc: /etc # To kopiuje config/files/etc do systemowego /etc
+      - usr: /usr
   
   - type: script
     scripts:
