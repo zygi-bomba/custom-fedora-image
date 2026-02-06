@@ -1,0 +1,20 @@
+# /etc/justfile
+
+setup-dots:
+    #!/bin/bash
+    REPO_URL="https://github.com/zygi-bomba/dotfiles.git"
+    DOT_DIR="$HOME/dotfiles"
+    
+    if [ ! -d "$DOT_DIR" ]; then
+        echo "Cloning dotfiles..."
+        git clone "$REPO_URL" "$DOT_DIR"
+    fi
+    
+    cd "$DOT_DIR"
+
+    for dir in */; do
+        pkg=${dir%/}
+        echo "Stowing $pkg..."
+        stow -R -t "$HOME" "$pkg"
+    done
+    echo "Gotowe! Twoje środowisko jest skonfigurowane."
