@@ -3,6 +3,8 @@
 # Inicjalizacja środowiska: klonuje repozytorium i bezpiecznie linkuje pliki
 init-dots:
     #!/bin/bash
+    set -euo pipefail
+
     # --- KONFIGURACJA ---
     DOTS_URL="https://github.com/zygi-bomba/dotfiles.git"
     DOTS_DIR="$HOME/dotfiles"
@@ -10,41 +12,48 @@ init-dots:
 
     echo "🚀 Rozpoczynam inicjalizację dotfiles..."
 
-    # 1. Klonowanie repozytorium (jeśli nie istnieje)
+    # 1. Przygotowanie repozytorium
     if [ ! -d "$DOTS_DIR" ]; then
         echo "📥 Klonuję repozytorium do $DOTS_DIR..."
         git clone "$DOTS_URL" "$DOTS_DIR"
     else
-        echo "✅ Repozytorium już istnieje, pobieram najnowsze zmiany..."
-        cd "$DOTS_DIR" && git pull
+        echo "✅ Repozytorium istnieje, aktualizuję..."
+        git -C "$DOTS_DIR" pull
     fi
 
-    # 2. Tworzenie folderu na kopie zapasowe
+    # 2. Tworzenie niezbędnych folderów
     mkdir -p "$BACKUP_DIR"
+    mkdir -p "$HOME/.config"
+
+    cd "$DOTS_DIR"
 
     # 3. Inteligentne linkowanie z backupem
-    cd "$DOTS_DIR"
-    # Szukamy tylko folderów (naszych pakietów jak niri, bash, nvim)
+    # Szukamy folderów, które nie są ukryte (omijamy .git)
     for pkg in */; do
-        pkg=${pkg%/} # Usuwamy ukośnik z nazwy
+        pkg=${pkg%/}
+        [ "$pkg" == ".git" ] && continue
         
         echo "📦 Przetwarzam pakiet: $pkg"
 
-        # Dla każdego pakietu sprawdzamy, co stow by zlinkował
-        # i jeśli w $HOME jest tam PRAWDZIWY plik/folder, przenosimy go do backupu
-        stow -nv -t "$HOME" "$pkg" 2>&1 | grep "existing target is not owned by stow" | awk '{print $NF}' | while read -r conflict; do
-            FULL_PATH="$HOME/$conflict"
-            if [ -e "$FULL_PATH" ] && [ ! -L "$FULL_PATH" ]; then
-                echo "⚠️  Backup: $conflict -> $BACKUP_DIR/"
-                mkdir -p "$(dirname "$BACKUP_DIR/$conflict")"
-                mv "$FULL_PATH" "$BACKUP_DIR/$conflict"
-            fi
-        done
+        # Wykrywanie konfliktów przez dry-run
+        # Przekierowujemy stderr do stdout (2>&1), aby grep go widział
+        CONFLICTS=$(stow -nv -t "$HOME" "$pkg" 2>&1 | grep "existing target is not owned by stow" | awk '{print $NF}' || true)
 
-        # 4. Finalne wywołanie STOW (teraz bez konfliktów)
-        stow -R -t "$HOME" "$pkg"
+        if [ -n "$CONFLICTS" ]; then
+            for conflict in $CONFLICTS; do
+                FULL_PATH="$HOME/$conflict"
+                if [ -e "$FULL_PATH" ] || [ -L "$FULL_PATH" ]; then
+                    echo "⚠️  Backup: $conflict -> $BACKUP_DIR/"
+                    mkdir -p "$(dirname "$BACKUP_DIR/$conflict")"
+                    mv "$FULL_PATH" "$BACKUP_DIR/$conflict"
+                fi
+            done
+        fi
+
+        # 4. Finalne wywołanie STOW
+        # -R (restow) jest bezpieczniejsze przy ponownym uruchamianiu
+        stow -R -v -t "$HOME" "$pkg"
     done
-    mkdir -p "$HOME/.config"
-    touch "$HOME/.config/.dots-initialized"
+
     echo "✨ Gotowe! Twoje dotfiles są aktywne."
     echo "📁 Kopie zapasowe starych plików znajdziesz w: $BACKUP_DIR"
