@@ -1,5 +1,5 @@
 name: atomic
-description: Moja reprodukowalna Fedora
+description: custom-fedora-image
 base-image: ghcr.io/blue-build/base-images/fedora-silverblue
 image-version: 43
 
