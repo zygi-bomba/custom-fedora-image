@@ -9,19 +9,21 @@ modules:
       - source: etc
         destination: /etc
   
-  - type: rpm-ostree
-    repos:
-      - https://copr.fedorainfracloud.org/coprs/yalter/niri/repo/fedora-%OS_VERSION%/yalter-niri-fedora-%OS_VERSION%.repo
+  - type: dnf
     install:
-      - terra-release
-      - noctalia-shell
-      - niri
-      - xorg-x11-server-Xwayland
-      - wl-clipboard
-      - xdg-desktop-portal-gtk
-      - xdg-desktop-portal-gnome
-      - gnome-keyring
-      - stow
-      - neovim
-      - git
-      - just
+      packages:
+        - terra-release
+        - noctalia-shell
+        - niri
+        - xorg-x11-server-Xwayland
+        - wl-clipboard
+        - xdg-desktop-portal-gtk
+        - xdg-desktop-portal-gnome
+        - gnome-keyring
+        - stow
+        - neovim
+        - git
+        - just
+      exclude:
+        - waybar
+        - fuzzel
