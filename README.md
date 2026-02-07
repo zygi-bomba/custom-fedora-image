@@ -27,7 +27,7 @@ The `latest` tag will automatically point to the latest build. That build will s
 
 After intalling the image you can upgrade it using:
   ```
-- rpm-ostree upgrade
+  rpm-ostree upgrade
   ```
 
 ## ISO
