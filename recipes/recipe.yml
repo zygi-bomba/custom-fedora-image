@@ -25,7 +25,3 @@ modules:
       - neovim
       - git
       - just
-  
-  - type: script
-    scripts:
-      - custom-setup.sh
