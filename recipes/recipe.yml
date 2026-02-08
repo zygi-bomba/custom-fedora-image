@@ -12,27 +12,32 @@ modules:
   - type: dnf
     install:
       packages:
-        - terra-release
+        # Window Manager & Compositor
         - noctalia-shell
         - niri
-  
+        
+        # Wayland/X11 Support
         - xorg-x11-server-Xwayland
         - wl-clipboard
+        
+        # Desktop Portals & Keyring
         - xdg-desktop-portal-gtk
         - xdg-desktop-portal-gnome
         - gnome-keyring
-  
-        # LazyVim
+        
+        # Development Tools
         - neovim
-        - lazygit 
-        - fd-find 
+        - lazygit
+        - fd-find
         - curl
         - ripgrep
         - tree-sitter-cli
-  
         - stow
         - git
         - just
+        
+        # Terra Repository
+        - terra-release
       exclude:
         - waybar
         - fuzzel
