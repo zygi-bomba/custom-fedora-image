@@ -15,13 +15,22 @@ modules:
         - terra-release
         - noctalia-shell
         - niri
+  
         - xorg-x11-server-Xwayland
         - wl-clipboard
         - xdg-desktop-portal-gtk
         - xdg-desktop-portal-gnome
         - gnome-keyring
-        - stow
+  
+        # LazyVim
         - neovim
+        - lazygit 
+        - fd-find 
+        - curl
+        - ripgrep
+        - tree-sitter-cli
+  
+        - stow
         - git
         - just
       exclude:
