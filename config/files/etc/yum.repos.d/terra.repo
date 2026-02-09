@@ -1,5 +1,0 @@
-[terra]
-name=Terra 43
-baseurl=https://repos.fyralabs.com/terra43/
-enabled=1
-gpgcheck=0
