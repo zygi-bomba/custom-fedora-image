@@ -13,7 +13,7 @@ modules:
     repository: https://github.com/zygi-bomba/dotfiles.git
     file-conflict-policy: replace
     disable-init: false
-    run-every: 0 
+    run-every: "0"
   
   - type: dnf
     repos:
