@@ -10,6 +10,11 @@ modules:
         destination: /etc
   
   - type: dnf
+    repos:
+      files:
+        - https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
+      copr:
+        - yalter/niri 
     install:
       packages:
         # Window Manager & Compositor
