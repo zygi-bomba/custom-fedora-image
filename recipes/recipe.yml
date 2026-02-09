@@ -30,6 +30,9 @@ modules:
         - xdg-desktop-portal-gnome
         - gnome-keyring
         
+        - distrobox
+        - podman
+        
         # Terra Repository
         - terra-release
       exclude:
