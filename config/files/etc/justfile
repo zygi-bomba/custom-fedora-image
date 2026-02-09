@@ -57,3 +57,143 @@ init-dots:
 
     echo "✨ Gotowe! Twoje dotfiles są aktywne."
     echo "📁 Kopie zapasowe starych plików znajdziesz w: $BACKUP_DIR"
+
+# Pokazuje status dotfiles i narzędzi
+status:
+    #!/bin/bash
+    set -euo pipefail
+    
+    echo "📊 Status dotfiles i narzędzi"
+    echo ""
+    
+    # Sprawdzenie repo dotfiles
+    if [ -d "$HOME/dotfiles" ]; then
+        echo "✅ Repozytorium dotfiles: $HOME/dotfiles"
+        cd "$HOME/dotfiles"
+        echo "   Branch: $(git branch --show-current)"
+        echo "   Ostatni commit: $(git log -1 --pretty=format:'%h - %s')"
+    else
+        echo "❌ Brak repozytorium dotfiles"
+    fi
+    
+    echo ""
+    
+    # Sprawdzenie narzędzi
+    echo "🔧 Zainstalowane narzędzia:"
+    for tool in nvim starship zoxide atuin fzf bat eza git-delta lazygit; do
+        if command -v $tool &> /dev/null; then
+            version=$(command $tool --version 2>/dev/null | head -n1 || echo "zainstalowany")
+            echo "   ✅ $tool - $version"
+        else
+            echo "   ❌ $tool - brak"
+        fi
+    done
+
+# Aktualizuje dotfiles z GitHub
+update-dots:
+    #!/bin/bash
+    set -euo pipefail
+    
+    DOTS_DIR="$HOME/dotfiles"
+    
+    if [ ! -d "$DOTS_DIR" ]; then
+        echo "❌ Repozytorium dotfiles nie istnieje. Uruchom najpierw 'jg init-dots'"
+        exit 1
+    fi
+    
+    echo "🔄 Aktualizuję dotfiles..."
+    cd "$DOTS_DIR"
+    git pull
+    
+    echo "🔗 Restow wszystkich pakietów..."
+    for pkg in */; do
+        pkg=${pkg%/}
+        [ "$pkg" == ".git" ] && continue
+        echo "   Restow: $pkg"
+        stow -R -v -t "$HOME" "$pkg"
+    done
+    
+    echo "✨ Aktualizacja zakończona!"
+
+# Inicjalizuje LazyVim
+setup-lazyvim:
+    #!/bin/bash
+    set -euo pipefail
+    
+    NVIM_CONFIG="$HOME/.config/nvim"
+    BACKUP_DIR="$HOME/.config/nvim.backup.$(date +%Y%m%d_%H%M%S)"
+    
+    echo "🚀 Instaluję LazyVim..."
+    
+    # Backup istniejącej konfiguracji
+    if [ -d "$NVIM_CONFIG" ]; then
+        echo "📦 Backup istniejącej konfiguracji do $BACKUP_DIR"
+        mv "$NVIM_CONFIG" "$BACKUP_DIR"
+    fi
+    
+    # Klonowanie LazyVim starter
+    echo "📥 Klonuję LazyVim starter..."
+    git clone https://github.com/LazyVim/starter "$NVIM_CONFIG"
+    rm -rf "$NVIM_CONFIG/.git"
+    
+    echo "✨ LazyVim zainstalowany! Uruchom 'nvim' aby dokończyć instalację."
+    echo "💡 Twoja stara konfiguracja: $BACKUP_DIR"
+
+# Inicjalizuje atuin (historia poleceń)
+setup-atuin:
+    #!/bin/bash
+    set -euo pipefail
+    
+    echo "🚀 Inicjalizuję atuin..."
+    
+    if ! command -v atuin &> /dev/null; then
+        echo "❌ atuin nie jest zainstalowany"
+        exit 1
+    fi
+    
+    # Import historii bash
+    if [ -f "$HOME/.bash_history" ]; then
+        echo "📥 Importuję historię bash..."
+        atuin import auto
+    fi
+    
+    echo "✨ Atuin skonfigurowany!"
+    echo "💡 Uruchom ponownie terminal lub 'source ~/.bashrc'"
+
+# Kompletny setup wszystkiego
+setup-all:
+    #!/bin/bash
+    set -euo pipefail
+    
+    echo "🚀 Pełna inicjalizacja środowiska..."
+    echo ""
+    
+    just --justfile /etc/justfile --working-directory ~ init-dots
+    echo ""
+    just --justfile /etc/justfile --working-directory ~ setup-lazyvim
+    echo ""
+    just --justfile /etc/justfile --working-directory ~ setup-atuin
+    echo ""
+    just --justfile /etc/justfile --working-directory ~ status
+    
+    echo ""
+    echo "✨ Wszystko gotowe! Uruchom ponownie terminal."
+
+# Czyści stare backupy (starsze niż 30 dni)
+cleanup-backups:
+    #!/bin/bash
+    set -euo pipefail
+    
+    BACKUP_BASE="$HOME/dotfiles_backup"
+    
+    echo "🧹 Czyszczenie starych backupów..."
+    
+    if [ ! -d "$BACKUP_BASE" ]; then
+        echo "✅ Brak backupów do wyczyszczenia"
+        exit 0
+    fi
+    
+    # Usuń backupy starsze niż 30 dni
+    find "$BACKUP_BASE" -maxdepth 1 -type d -mtime +30 -exec rm -rf {} \;
+    
+    echo "✨ Backupy wyczyszczone!"

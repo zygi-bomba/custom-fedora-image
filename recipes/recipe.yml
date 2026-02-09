@@ -41,6 +41,18 @@ modules:
         - git
         - just
         
+        # Shell Enhancements
+        - starship           # nowoczesny prompt
+        - zoxide             # inteligentne cd
+        - atuin              # zaawansowana historia poleceń
+        - fzf                # fuzzy finder
+        - bat                # lepszy cat
+        - eza                # nowoczesny ls
+
+        # Git Tools
+        - git-delta          # lepsze git diff
+        - gh                 # GitHub CLI
+        
         # Terra Repository
         - terra-release
       exclude:
