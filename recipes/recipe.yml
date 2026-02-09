@@ -30,17 +30,6 @@ modules:
         - xdg-desktop-portal-gnome
         - gnome-keyring
         
-        # Development Tools
-        - neovim
-        - lazygit
-        - fd-find
-        - curl
-        - ripgrep
-        - tree-sitter-cli
-        - stow
-        - git
-        - just
-        
         # Terra Repository
         - terra-release
       exclude:
