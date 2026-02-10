@@ -50,15 +50,19 @@ modules:
 
   - type: default-flatpaks
     configurations:
-      - notify: true
-        scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install:
+      - scope: user
+        repo:
+          # you can override the title to make inclusion of both system and user repos clearer
+          title: Flathub (user)
+      - scope: system
+        repo:
+          title: Flathub (system)
+        install: # system flatpaks we want all users to have and not remove
+          - com.github.tchx84.Flatseal
           - app.zen_browser.zen
-      - scope: user # Also add Flathub user repo, but no user packages
-
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
-  
+    
   - type: script
     scripts:
       - install-packages.sh
+    
+  - type: signing # this sets up the proper policy & signing files for signed images to work fully
