@@ -37,7 +37,6 @@ modules:
         
         - distrobox
         - podman
-        - docker
         
         - ghostty
         
@@ -63,10 +62,5 @@ modules:
   - type: script
     scripts:
       - install-packages.sh
-      - |
-        # Enable the podman socket system-wide for all users
-        systemctl --global enable podman.socket
-        # Ensure our setup script is executable
-        chmod +x /usr/bin/setup-devpod-handsfree
         
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
