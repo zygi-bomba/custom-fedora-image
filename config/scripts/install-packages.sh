@@ -5,5 +5,8 @@
 # builds actually ran successfully without any errors!
 set -oue pipefail
 
+# Install Nix package manager
+curl -L https://nixos.org/nix/install | sh -s -- --daemon --yes
+
 # Install the devbox binary to /usr/bin
 curl -fsSL https://get.jetpack.io/devbox | bash -s -- -f
