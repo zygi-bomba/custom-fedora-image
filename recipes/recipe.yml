@@ -40,8 +40,6 @@ modules:
 
         - ghostty
         
-        - selinux-policy-devel
-        
         # Terra Repository
         - terra-release
       exclude:
