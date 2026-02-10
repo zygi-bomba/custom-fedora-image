@@ -5,8 +5,5 @@
 # builds actually ran successfully without any errors!
 set -oue pipefail
 
-# Nix Install
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install linux --init none --no-start-daemon --no-confirm && 
-chown -R $(whoami) /nix
-# DevBox install
-curl -fsSL https://get.jetify.com/devbox | bash -s -- -f
+curl -L -o /usr/bin/devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64"
+chmod +x /usr/bin/devpod
