@@ -7,7 +7,6 @@ set -oue pipefail
 
 # Nix Install
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install linux --init none --no-start-daemon --no-confirm && 
-echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf && \
-
+chown -R $(whoami) /nix
 # DevBox install
 curl -fsSL https://get.jetify.com/devbox | bash -s -- -f
