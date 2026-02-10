@@ -29,6 +29,7 @@ modules:
         # Wayland/X11 Support
         - xorg-x11-server-Xwayland
         - wl-clipboard
+        - cliphist
         
         # Desktop Portals & Keyring
         - xdg-desktop-portal-gtk
