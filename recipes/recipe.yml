@@ -9,14 +9,7 @@ modules:
       - source: etc
         destination: /etc
   
-  - type: containerfile
-    snippets:
-      - |
-        RUN --mount=type=tmpfs,target=/tmp \
-            curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
-            sh -s -- install linux --init none --no-start-daemon --no-confirm && \
-            echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf && \
-            systemctl enable nix-daemon.service
+
 
     repository: https://github.com/zygi-bomba/dotfiles.git
     branch: main
