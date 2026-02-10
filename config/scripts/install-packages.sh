@@ -7,7 +7,7 @@ set -oue pipefail
 set -x # Debug output
 
 # Install Nix package manager
-if ! curl -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm; then
+if ! curl -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm --init none; then
     echo "Nix installation failed"
     exit 1
 fi
