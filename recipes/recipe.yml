@@ -9,6 +9,10 @@ modules:
       - source: etc
         destination: /etc
   
+  - type: containerfile
+    snippets:
+      - RUN --mount=type=tmpfs,target=/tmp curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+    
   - type: chezmoi
     repository: https://github.com/zygi-bomba/dotfiles.git
     branch: main
@@ -63,8 +67,4 @@ modules:
     scripts:
       - install-packages.sh
 
-  - type: containerfile
-    snippets:
-      - RUN --mount=type=tmpfs,target=/tmp curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-    
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
