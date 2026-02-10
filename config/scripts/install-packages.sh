@@ -6,7 +6,7 @@
 set -oue pipefail
 
 # Install Nix package manager
-curl -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm --no-start-daemon --init none
+curl -fsSL https://install.determinate.systems/nix | sh -s -- install --no-confirm -- --no-start-daemon --init none
 
 # Install the devbox binary to /usr/bin
 curl -fsSL https://get.jetpack.io/devbox | bash -s -- -f
