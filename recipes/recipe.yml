@@ -11,8 +11,7 @@ modules:
   
   - type: containerfile
     snippets:
-      - RUN --mount=type=tmpfs,target=/tmp curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-    
+      - RUN --mount=type=tmpfs,target=/tmp curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --no-confirm
   - type: chezmoi
     repository: https://github.com/zygi-bomba/dotfiles.git
     branch: main
