@@ -8,9 +8,8 @@ modules:
     files:
       - source: etc
         destination: /etc
-  
 
-
+  - type: chezmoi
     repository: https://github.com/zygi-bomba/dotfiles.git
     branch: main
     file-conflict-policy: replace
