@@ -37,7 +37,8 @@ modules:
         
         - distrobox
         - podman
-
+        - docker
+        
         - ghostty
         
         # Terra Repository
