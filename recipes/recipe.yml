@@ -43,10 +43,13 @@ modules:
         
         # Terra Repository
         - terra-release
-      exclude:
+        
+        exclude:
         - waybar
         - fuzzel
-      remove:
+        
+    remove:
+      packages:
         - tmux
 
   - type: default-flatpaks
