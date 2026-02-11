@@ -80,5 +80,10 @@ modules:
         - Roboto
         - Open Sans
         - Inter
-  
+    
+  - type: systemd
+    system:
+      enabled:
+        - set-user-shell.service
+    
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
