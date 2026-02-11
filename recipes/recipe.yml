@@ -46,6 +46,7 @@ modules:
       exclude:
         - waybar
         - fuzzel
+        - tmux
 
   - type: default-flatpaks
     configurations:
