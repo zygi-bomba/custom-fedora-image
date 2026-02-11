@@ -33,8 +33,10 @@ modules:
         - cliphist
         
         # Desktop Portal
-        - xdg-desktop-portal-wlr
-        
+        - xdg-desktop-portal-gnome
+        - xdg-desktop-portal-gtk
+        - gnome-keyring
+  
         - distrobox
         - podman
         
