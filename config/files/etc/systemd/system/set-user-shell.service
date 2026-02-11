@@ -5,7 +5,7 @@ ConditionPathExists=!/var/lib/set-user-shell-done
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/bash -c 'for user in $(ls /home); do usermod -s /usr/bin/zsh $user; done && touch /var/lib/set-user-shell-done'
+ExecStart=/usr/bin/bash -c 'for user in $(ls /home); do usermod -s /usr/bin/nushell $user; done && touch /var/lib/set-user-shell-done'
 RemainAfterExit=yes
 
 [Install]
