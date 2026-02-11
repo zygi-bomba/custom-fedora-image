@@ -46,6 +46,7 @@ modules:
       exclude:
         - waybar
         - fuzzel
+      remove:
         - tmux
 
   - type: default-flatpaks
@@ -55,6 +56,7 @@ modules:
           # you can override the title to make inclusion of both system and user repos clearer
           title: Flathub (user)
       - scope: system
+        notify: false
         repo:
           title: Flathub (system)
         install: # system flatpaks we want all users to have and not remove
