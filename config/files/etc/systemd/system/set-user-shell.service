@@ -1,11 +1,10 @@
 [Unit]
-Description=Set user shell to zsh on first boot
+Description=Set user shell to nushell
 After=multi-user.target
-ConditionPathExists=!/var/lib/set-user-shell-done
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/bash -c 'for user in $(ls /home); do usermod -s /usr/bin/nu $user; done && touch /var/lib/set-user-shell-done'
+ExecStart=/usr/bin/bash -c 'for user in $(ls /home); do usermod -s /usr/bin/nu $user; done'
 RemainAfterExit=yes
 
 [Install]
