@@ -32,10 +32,8 @@ modules:
         - wl-clipboard
         - cliphist
         
-        # Desktop Portals & Keyring
-        - xdg-desktop-portal-gtk
-        - xdg-desktop-portal-gnome
-        - gnome-keyring
+        # Desktop Portal
+        - xdg-desktop-portal-wlr
         
         - distrobox
         - podman
