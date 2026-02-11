@@ -60,9 +60,5 @@ modules:
         install: # system flatpaks we want all users to have and not remove
           - com.github.tchx84.Flatseal
           - app.zen_browser.zen
-    
-  - type: script
-    scripts:
-      - install-packages.sh
         
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
