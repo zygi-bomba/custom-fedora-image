@@ -19,6 +19,7 @@ modules:
       files:
         - https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
       copr:
+        - atim/nushell 
         - yalter/niri 
     install:
       packages:
