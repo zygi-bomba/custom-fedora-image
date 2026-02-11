@@ -40,17 +40,15 @@ modules:
         - podman
         
         - ghostty
+        - zsh
         
         # Terra Repository
-        - terra-release
-        
-        exclude:
-        - waybar
-        - fuzzel
-        
+        - terra-release    
     remove:
       packages:
         - tmux
+        - waybar
+        - fuzzel
 
   - type: default-flatpaks
     configurations:
