@@ -1,0 +1,12 @@
+[Unit]
+Description=Set user shell to zsh on first boot
+After=multi-user.target
+ConditionPathExists=!/var/lib/set-user-shell-done
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash -c 'for user in $(ls /home); do usermod -s /usr/bin/zsh $user; done && touch /var/lib/set-user-shell-done'
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
