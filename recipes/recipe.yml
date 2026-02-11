@@ -40,7 +40,7 @@ modules:
         - podman
         
         - ghostty
-        - zsh
+        - nushell
         
         # Terra Repository
         - terra-release    
