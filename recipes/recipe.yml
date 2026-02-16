@@ -58,6 +58,7 @@ modules:
           title: Flathub (user)
         install:
           - app.zen_browser.zen
+          - md.obsidian.Obsidian
         
       - scope: system
         notify: false
