@@ -59,6 +59,7 @@ modules:
         install:
           - app.zen_browser.zen
           - md.obsidian.Obsidian
+          - com.github.zocker_160.SyncThingy 
         
       - scope: system
         notify: false
