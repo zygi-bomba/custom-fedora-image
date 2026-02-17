@@ -34,12 +34,18 @@ modules:
         
         # Desktop Portal
         - xdg-desktop-portal-wlr
-  
+
+        # Containers
         - distrobox
         - podman
-        
+
+        # Terminal, shell
         - ghostty
         - nushell
+
+        # VPN
+        - openconnect
+        - wireguard-tools
         
         # Terra Repository
         - terra-release    
