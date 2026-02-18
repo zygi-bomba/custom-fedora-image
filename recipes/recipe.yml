@@ -44,9 +44,9 @@ modules:
         - nushell
 
         # VPN
-        - NetworkManager-openconnect  
-        - NetworkManager-wireguard
-        - vpnc-scripts
+        - NetworkManager-openconnect
+        - NetworkManager-vpn-libnm
+        - vpnc-script
         - wireguard-tools
         
         # Terra Repository
