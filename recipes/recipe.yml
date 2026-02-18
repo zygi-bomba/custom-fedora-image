@@ -45,7 +45,6 @@ modules:
 
         # VPN
         - NetworkManager-openconnect
-        - NetworkManager-vpn-libnm
         - vpnc-script
         - wireguard-tools
         
