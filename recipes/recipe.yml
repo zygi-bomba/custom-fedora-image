@@ -8,7 +8,9 @@ modules:
     files:
       - source: etc
         destination: /etc
-
+      - source: usr
+        destination: /usr
+        
   - type: chezmoi
     repository: https://github.com/zygi-bomba/dotfiles.git
     branch: main
@@ -103,4 +105,4 @@ modules:
   - type: script
     snippets:
       - "chmod 0600 /etc/NetworkManager/system-connections/*.nmconnection"
-      - "chmod +x /files/usr/local/bin/vpn-up.sh"
+      - "chmod +x /usr/local/bin/vpn-up.sh"
