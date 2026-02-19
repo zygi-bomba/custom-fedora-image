@@ -8,8 +8,6 @@ modules:
     files:
       - source: etc
         destination: /etc
-      - source: usr
-        destination: /usr
         
   - type: chezmoi
     repository: https://github.com/zygi-bomba/dotfiles.git
