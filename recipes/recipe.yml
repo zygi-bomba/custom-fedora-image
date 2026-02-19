@@ -103,4 +103,4 @@ modules:
   - type: script
     snippets:
       - "chmod 0600 /etc/NetworkManager/system-connections/*.nmconnection"
-      - "chmod +x /usr/local/bin/vpn-up.sh"
+      - "chmod +x /files/usr/local/bin/vpn-up.sh"
