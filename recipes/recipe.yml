@@ -96,9 +96,11 @@ modules:
       enabled:
         - set-user-shell.service
         - set-user-shell-on-update.path
+        - vpn-vault.service
     
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
   
   - type: script
     snippets:
       - "chmod 0600 /etc/NetworkManager/system-connections/*.nmconnection"
+      - "chmod +x /usr/local/bin/vpn-up.sh"
