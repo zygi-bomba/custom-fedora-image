@@ -6,9 +6,7 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-# Path to the script we created earlier
-ExecStart=/usr/local/bin/vpn-hydrate.sh
-# Ensures the service stays "active" so it doesn't run repeatedly
+ExecStart=/usr/bin/vpn-up.sh
 RemainAfterExit=yes
 # Optional: Add a delay if your Vault container takes time to start
 # ExecStartPre=/usr/bin/sleep 5
