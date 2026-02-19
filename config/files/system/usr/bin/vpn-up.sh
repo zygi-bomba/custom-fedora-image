@@ -1,29 +1,34 @@
 #!/bin/bash
-# Configuration
+# Konfiguracja
 export VAULT_ADDR="http://192.168.2.100:8200"
 export VAULT_TOKEN="root-token"
 
-# 1. Fetch Home Secrets
-HOME_PRIV=$(vault kv get -field=private_key secrets/vpn/home)
-HOME_ADDR=$(vault kv get -field=home_addr secrets/vpn/home)
-HOME_PSK=$(vault kv get -field=preshared_key secrets/vpn/home)
-HOME_PUB=$(vault kv get -field=public_key secrets/vpn/home)
+# 1. Pobieranie danych z Vault (używając jq dla bezpieczeństwa KV v2)
+HOME_JSON=$(vault kv get -format=json secrets/vpn/home)
+PW_JSON=$(vault kv get -format=json secrets/vpn/pw)
 
-# 2. Fetch Work Secrets
-ISOD_USER=$(vault kv get -field=username secrets/vpn/pw)
-ISOD_PASS=$(vault kv get -field=password secrets/vpn/pw)
+HOME_PRIV=$(echo "$HOME_JSON" | jq -r '.data.data.private_key')
+HOME_ADDR=$(echo "$HOME_JSON" | jq -r '.data.data.home_addr')
+HOME_PSK=$(echo "$HOME_JSON" | jq -r '.data.data.preshared_key')
+HOME_PUB=$(echo "$HOME_JSON" | jq -r '.data.data.public_key')
 
-# 3. Apply to NetworkManager Memory
-# Home WireGuard
+ISOD_USER=$(echo "$PW_JSON" | jq -r '.data.data.username')
+ISOD_PASS=$(echo "$PW_JSON" | jq -r '.data.data.password')
+
+# 2. Iniekcja WireGuard (Home)
+# Twoja wersja nmcli nie pozwala na 'modify wireguard.peers'.
+# Rozwiązaniem jest bezpośrednia edycja parametrów sekcji peera.
 nmcli connection modify home \
   wireguard.private-key "$HOME_PRIV" \
   wireguard-peer."$HOME_PUB".endpoint "$HOME_ADDR" \
   wireguard-peer."$HOME_PUB".preshared-key "$HOME_PSK"
 
-# PW AnyConnect (Split PW)
+# 3. Iniekcja AnyConnect (Split PW)
+# W Twoim pliku PW.nmconnection oba pola miały nazwę username.
+# Musimy to rozdzielić na username i password.
 nmcli connection modify "Split PW" \
   vpn.secrets "form:main:username=$ISOD_USER, form:main:password=$ISOD_PASS"
 
-# 4. Establish Connections
+# 4. Uruchomienie połączeń
 nmcli connection up home
 nmcli connection up "Split PW"

@@ -21,6 +21,7 @@ protocol=anyconnect
 resolve-flags=2
 stoken_source=disabled
 xmlconfig-flags=0
+password-flags=2
 service-type=org.freedesktop.NetworkManager.openconnect
 
 [vpn-secrets]

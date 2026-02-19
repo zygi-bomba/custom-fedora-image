@@ -6,6 +6,7 @@ interface-name=wg0
 
 [wireguard]
 listen-port=51820
+private-key-flags=0
 
 [ipv4]
 address1=10.13.13.3/32
