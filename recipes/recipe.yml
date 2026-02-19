@@ -6,8 +6,8 @@ image-version: 43
 modules:
   - type: files
     files:
-      - source: etc
-        destination: /etc
+      - source: system
+        destination: /
         
   - type: chezmoi
     repository: https://github.com/zygi-bomba/dotfiles.git
