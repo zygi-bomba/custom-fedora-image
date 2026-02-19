@@ -49,7 +49,9 @@ modules:
         - wireguard-tools
         
         # Terra Repository
-        - terra-release    
+        - terra-release
+
+        - vault
     remove:
       packages:
         - tmux
@@ -96,3 +98,7 @@ modules:
         - set-user-shell-on-update.path
     
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  
+  - type: script
+    snippets:
+      - "chmod 0600 /etc/NetworkManager/system-connections/*.nmconnection"
