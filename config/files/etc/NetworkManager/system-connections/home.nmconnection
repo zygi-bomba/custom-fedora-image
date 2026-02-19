@@ -2,18 +2,10 @@
 id=home
 uuid=487a66b0-61df-40a1-a4cf-adf6bbc8e9c4
 type=wireguard
-autoconnect=false
 interface-name=wg0
 
 [wireguard]
 listen-port=51820
-private-key=$PRIVATE_KEY
-
-[wireguard-peer.$PUBLIC_KEY]
-endpoint=$HOME_IP
-preshared-key=$PRESHARED_KEY
-preshared-key-flags=0
-allowed-ips=0.0.0.0/0;
 
 [ipv4]
 address1=10.13.13.3/32
