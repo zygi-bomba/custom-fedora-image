@@ -48,7 +48,6 @@ modules:
         - vpnc-script
         - wireguard-tools
         
-        - zenity 
         # Terra Repository
         - terra-release
 
