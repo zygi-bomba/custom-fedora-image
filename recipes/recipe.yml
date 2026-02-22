@@ -8,12 +8,13 @@ modules:
     files:
       - source: system
         destination: /
-        
+
+  # Dotfiles Manager
   - type: chezmoi
     repository: https://github.com/zygi-bomba/dotfiles.git
     branch: main
     file-conflict-policy: replace
-  
+ 
   - type: dnf
     repos:
       files:
@@ -50,7 +51,8 @@ modules:
         
         # Terra Repository
         - terra-release
-
+        
+        # Secret management
         - vault
     remove:
       packages:
@@ -63,12 +65,13 @@ modules:
       - scope: user
         notify: false
         repo:
-          # you can override the title to make inclusion of both system and user repos clearer
           title: Flathub (user)
         install:
           - app.zen_browser.zen
           - md.obsidian.Obsidian
-          - com.github.zocker_160.SyncThingy 
+          - com.github.zocker_160.SyncThingy
+          - org.virt_manager.virt-manager
+          - org.virt_manager.virt_manager.Extension.Qemu
         
       - scope: system
         notify: false
@@ -98,7 +101,7 @@ modules:
         - set-user-shell-on-update.path
         - vpn-vault.service
     
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  - type: signing
   
   - type: script
     snippets:
