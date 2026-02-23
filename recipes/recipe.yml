@@ -40,9 +40,8 @@ modules:
         - distrobox
         - podman
 
-        # Terminal, shell
+        # Terminal
         - ghostty
-        - nushell
 
         # VPN
         - NetworkManager-openconnect
@@ -54,8 +53,6 @@ modules:
         
         # Secret management
         - vault
-
-        - gcc
     remove:
       packages:
         - tmux
@@ -99,8 +96,6 @@ modules:
   - type: systemd
     system:
       enabled:
-        - set-user-shell.service
-        - set-user-shell-on-update.path
         - vpn-vault.service
     
   - type: signing
