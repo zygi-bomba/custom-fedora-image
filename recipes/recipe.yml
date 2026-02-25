@@ -39,6 +39,7 @@ modules:
         # Containers
         - distrobox
         - podman
+        - podman-compose
 
         # Terminal
         - ghostty
