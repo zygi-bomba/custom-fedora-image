@@ -19,6 +19,7 @@ modules:
     repos:
       files:
         - https://raw.githubusercontent.com/terrapkg/subatomic-repos/main/terra.repo
+        - https://rpm.tuxedocomputers.com/fedora/tuxedo.repo
       copr:
         - atim/nushell 
         - yalter/niri 
@@ -54,6 +55,9 @@ modules:
         
         # Secret management
         - vault
+
+        # Drivers
+        - tuxedo-yt6801
     remove:
       packages:
         - tmux
