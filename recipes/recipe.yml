@@ -1,6 +1,6 @@
 name: atomic
 description: custom-fedora-image
-base-image: ghcr.io/ublue-os/bluefin-dx
+base-image: quay.io/fedora-ostree-desktops/silverblue
 image-version: latest
 
 modules:
@@ -48,6 +48,17 @@ modules:
         - libvirt 
         - virt-install 
         - libguestfs-tools
+        - libvirt-daemon-driver-network
+        - libvirt-daemon-driver-nodedev
+        - libvirt-daemon-driver-qemu 
+        - libvirt-daemon-driver-storage-core 
+        - qemu-audio-spice 
+        - qemu-char-spice 
+        - qemu-device-display-qxl 
+        - qemu-device-display-virtio-gpu 
+        - qemu-device-display-virtio-vga 
+        - qemu-device-usb-redirect 
+        - qemu-system-x86-core
         
         # Terminal
         - ghostty
@@ -65,6 +76,8 @@ modules:
 
         # Drivers
         - tuxedo-yt6801
+
+        - polkit-mate
     remove:
       packages:
         - tmux
@@ -110,10 +123,12 @@ modules:
       enabled:
         - vpn-vault.service
         - libvirtd.service
-    
+        - virtqemud.service
+        - virtnetworkd.service
   - type: signing
   
   - type: script
     snippets:
       - "chmod 0600 /etc/NetworkManager/system-connections/*.nmconnection"
       - "chmod +x /usr/bin/vpn-up.sh"
+      - "rm -f /etc/yum.repos.d/terra*.repo"
