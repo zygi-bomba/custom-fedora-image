@@ -42,6 +42,12 @@ modules:
         - podman
         - podman-compose
 
+        # Virtual Machines
+        - virt-manager
+        - libvirt
+        - quemu-kvm
+        - edk2-ovmf
+        
         # Terminal
         - ghostty
 
@@ -102,6 +108,7 @@ modules:
     system:
       enabled:
         - vpn-vault.service
+        - libvirtd.service
     
   - type: signing
   
