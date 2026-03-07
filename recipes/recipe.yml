@@ -1,7 +1,7 @@
 name: atomic
 description: custom-fedora-image
-base-image: ghcr.io/blue-build/base-images/fedora-silverblue
-image-version: 43
+base-image: ghcr.io/ublue-os/bluefin-dx
+image-version: latest
 
 modules:
   - type: files
