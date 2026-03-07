@@ -44,9 +44,10 @@ modules:
 
         # Virtual Machines
         - virt-manager
-        - libvirt
-        - quemu-kvm
-        - edk2-ovmf
+        - qemu-kvm-core
+        - libvirt 
+        - virt-install 
+        - libguestfs-tools
         
         # Terminal
         - ghostty
