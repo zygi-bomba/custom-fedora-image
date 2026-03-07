@@ -1,6 +1,6 @@
 name: atomic
 description: custom-fedora-image
-base-image: quay.io/fedora-ostree-desktops/silverblue
+base-image: ghcr.io/blue-build/base-images/fedora-silverblue
 image-version: latest
 
 modules:
