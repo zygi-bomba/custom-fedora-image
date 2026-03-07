@@ -94,8 +94,6 @@ modules:
           - app.zen_browser.zen
           - md.obsidian.Obsidian
           - com.github.zocker_160.SyncThingy
-          - org.virt_manager.virt-manager
-          - org.virt_manager.virt_manager.Extension.Qemu
         
       - scope: system
         notify: false
