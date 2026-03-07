@@ -77,7 +77,7 @@ modules:
         # Drivers
         - tuxedo-yt6801
 
-        - polkit-mate
+        - mate-polkit
     remove:
       packages:
         - tmux
